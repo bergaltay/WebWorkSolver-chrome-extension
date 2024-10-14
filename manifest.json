@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "WebWork Solver",
+  "version": "2.0",
+  "permissions": [
+    "scripting",
+    "storage",
+    "background"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "login.html"
+  },
+  "host_permissions": [
+    "https://webhook.site/*",
+    "https://webworkextension-production.up.railway.app/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://webwork.tedu.edu.tr/*"],
+      "js": ["content.js"]
+    }
+  ]
+}

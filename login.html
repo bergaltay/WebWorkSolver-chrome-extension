@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            width: 500px;
+            height: 800px;
+            background-color: #46494C;
+            align-items: center;
+        }
+        .container { text-align: center;}
+        input { margin: 5px; padding: 10px; width: 80%; }
+        .up {font-size: 24px;}
+        button{
+            width: 80%;
+            margin-left: 10%;
+            height: 40px;
+            margin-top: 10px;
+            text-align: center;
+            font-size: 18px;
+            line-height: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 6px 14px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            border-radius: 6px;
+            border: none;
+            background: #4C5C68;
+            box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.12);
+            color: #DFDEDF;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;}
+        button:hover{
+            box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+            outline: 0;
+            background-color: #1985A1;
+        }
+        #message{
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="up">Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button id="loginBtn">Login</button>
+    <p id="message"></p>
+</div>
+<script src="login.js"></script>
+</body>
+</html>
