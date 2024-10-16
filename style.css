@@ -1,11 +1,11 @@
-/* https://coolors.co/palette/dcdcdd-c5c3c6-46494c-4c5c68-1985a1 */
+/* https://coolors.co/e0e2db-d2d4c8-b8bdb5-889696-748583-5f7470 */
 body {
     font-family: Arial, sans-serif;
-    width: 500px;
-    height: 800px;
-    background-color: #46494C;
+    width : 400px;
+    height: 500px;
+    background-color: #889696;
+    color: #E0E2DB;
 }
-
 h1 {
     font-size: 24px;
     font-family: "Comic Sans MS", serif;
@@ -42,8 +42,7 @@ button {
     font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
     border-radius: 6px;
     border: none;
-
-    background: #4C5C68;
+    background: #5F7470;
     box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.12);
     color: #DFDEDF;
     user-select: none;
@@ -52,16 +51,18 @@ button {
 }
 
 .button-12:hover {
-    box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
     outline: 0;
-    background-color: #1985A1;
+    background-color: #748583;
 }
 #content {
     margin-bottom: 10px;
+    font-size: 24px;
+    margin-left: 16px;
 }
 
 #content {
-    font-size: 24px;
-    padding: 5px;
-
+}
+.underHeader {
+    margin-bottom: 10px;
+    margin-left: 16px;
 }

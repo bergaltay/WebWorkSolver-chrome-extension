@@ -2,7 +2,7 @@
 function extractData() {
     let problemPath = null;
     let randomSeed  = null;
-    let userid        = null;
+    let userid      = null;
 
     // Get the hidden input element
     const hiddenInput = document.querySelector('input[name="randomSeed"]');
@@ -26,8 +26,6 @@ function extractData() {
     } else {
         console.error("user not found");
     }
-
-
     // Log the extracted values for debugging
     console.log('Extracted:', { problemPath, randomSeed, userid });
 

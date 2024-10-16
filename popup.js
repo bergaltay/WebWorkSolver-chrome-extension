@@ -19,7 +19,7 @@ function loadContent() {
             let i = 1;
             answers.forEach(answer => {
                 const answerDiv = document.createElement('h1'); // Create a new div for each answer
-                answerDiv.textContent = i + " " + answer.trim(); // Trim whitespace and set the text content
+                answerDiv.textContent = i + ":    " + answer.trim(); // Trim whitespace and set the text content
                 contentDiv.appendChild(answerDiv); // Append the answer div to the content div
                 i++;
             });
@@ -37,6 +37,7 @@ function saveContent(text) {
     chrome.storage.local.set({ popupContent: text }, () => {
         console.log('Content saved:', text);
     });
+
     loadContent();
 }
 
@@ -46,13 +47,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Listen for messages from the background script
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         // Check if the message contains the text field
-        for (let i = 0;i<1;i++) {
-            const contentDiv = document.getElementById('content');
-            const answerDiv = document.createElement('h1'); // Create a new div for the incoming text
-            answerDiv.textContent = request.text; // Set the text content to the incoming text
-            contentDiv.appendChild(answerDiv); // Append to the content div
-            saveContent(contentDiv.innerText); // Save all content to storage
+        if (request.text) {
+            for (let i = 0;i<1;i++) {
+                const contentDiv = document.getElementById('content');
+                const answerDiv = document.createElement('h1'); // Create a new div for the incoming text
+                answerDiv.textContent = request.text; // Set the text content to the incoming text
+                contentDiv.appendChild(answerDiv); // Append to the content div
+                saveContent(contentDiv.innerText);
+            }
         }
+        if (request.ticket) {
+            // Display the ticket value in a specific HTML element
+            document.getElementById('ticket').innerText = request.ticket;
+        }
+
     });
 });
 function deleteContent() {
@@ -63,22 +71,7 @@ function deleteContent() {
         contentDiv.innerHTML = 'Loading...';
     });
 }
-document.getElementById('logoutBtn').addEventListener('click', () => {
-    // Clear login status
-    chrome.storage.local.set({ loggedIn: false }, () => {
-        // Redirect back to login
-        chrome.action.setPopup({ popup: "login.html" });
-        window.location.href = "login.html";
-    });
-});
 
-// Ensure the user is logged in
-chrome.storage.local.get(['loggedIn'], (result) => {
-    if (!result.loggedIn) {
-        // Redirect to login if not authenticated
-        window.location.href = "login.html";
-    }
-});
 
 //---------------------------------------------------------------------
 
