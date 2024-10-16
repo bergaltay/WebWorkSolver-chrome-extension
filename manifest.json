@@ -15,8 +15,7 @@
   },
   "host_permissions": [
     "https://webhook.site/*",
-    "https://webworkextension-production.up.railway.app/*",
-    "http://127.0.0.1:3000/*"
+    "https://webworkextension-production.up.railway.app/*"
   ],
   "content_scripts": [
     {
