@@ -1,6 +1,6 @@
 // background.js
 // URL to send the webhook
-const url = "http://127.0.0.1:3000/webhook"; // Replace with your webhook URL
+const url = "https://webworkextension-production.up.railway.app/webhook"; // Replace with your webhook URL
 
 const sendMessageToPopup = (message) => {
     chrome.runtime.sendMessage({ text: message });
