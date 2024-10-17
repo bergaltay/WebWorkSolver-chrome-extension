@@ -10,5 +10,7 @@ DOSYAYI ZIP'TEN ÇIKARIN, UNZIP THE FILE
 ![image](https://github.com/user-attachments/assets/5b267774-ddb1-4bfe-b82a-314bb9b4ea34)
 ![image](https://github.com/user-attachments/assets/b492a717-33e9-487b-9089-455464c1e1fa)
 ![image](https://github.com/user-attachments/assets/3b6b36ee-94b9-4ddd-9473-f478f37bdc6e)
+
+.
 En içteki klasörü seçin
 Select the inner folder
