@@ -9,7 +9,7 @@ function extractData() {
     if (hiddenInput) {
         randomSeed = hiddenInput.value;
     } else {
-        console.error("randomSeed not found");
+        console.error("webwork page does not exist");
     }
 
 
@@ -17,7 +17,7 @@ function extractData() {
     if (hiddenInput2) {
         problemPath = hiddenInput2.value;
     } else {
-        console.error("problemPath not found");
+        console.error("webwork page does not exist");
     }
 
     const hiddenInput3 = document.querySelector('input[name="user"]');
@@ -26,12 +26,10 @@ function extractData() {
     } else {
         console.error("user not found");
     }
-    // Log the extracted values for debugging
-    console.log('Extracted:', { problemPath, randomSeed, userid });
 
     // Send the extracted data to storage
     chrome.storage.local.set({ problemPath, randomSeed, userid }, () => {
-        console.log('Data stored:', { problemPath, randomSeed, userid });
+        console.log('Data stored:');
     });
 }
 extractData();
