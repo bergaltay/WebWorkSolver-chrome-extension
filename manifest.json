@@ -3,7 +3,6 @@
   "name": "WebWork Solver",
   "version": "2.0",
   "permissions": [
-    "scripting",
     "storage",
     "background"
   ],
@@ -15,7 +14,8 @@
   },
   "host_permissions": [
     "https://webhook.site/*",
-    "https://webworkextension-production.up.railway.app/*"
+    "https://webworkextension-production.up.railway.app/*",
+    "http://127.0.0.1:3000/*"
   ],
   "content_scripts": [
     {

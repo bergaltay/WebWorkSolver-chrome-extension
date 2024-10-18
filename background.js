@@ -1,12 +1,13 @@
-// background.js
-// URL to send the webhook
-const url = "https://webworkextension-production.up.railway.app/webhook"; // Replace with your webhook URL
+const url = "https://webworkextension-production.up.railway.app/webhook";
 
 const sendMessageToPopup = (message) => {
     chrome.runtime.sendMessage({ text: message });
 };
 const sendTicketToPopup = (ticketCount) => {
     chrome.runtime.sendMessage({ ticket: ticketCount });
+};
+const sendErrorToPopup = (error) => {
+    chrome.runtime.sendMessage({ error: error });
 };
 // Function to send the webhook
 function sendWebhook() {
@@ -17,8 +18,6 @@ function sendWebhook() {
         const randomSeed = data.randomSeed || 'defaultRandomSeed';
         const userid = data.userid || 'defaultUser';
 
-
-        // Data to send in the webhook
         const payload = {
             "filePath" : problemPath,
             "problemSeed" : randomSeed,
@@ -32,31 +31,32 @@ function sendWebhook() {
             body: JSON.stringify(payload)
         })
             .then(response => {
-                // Check if the response status is OK
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                return response.json();  // Return the parsed JSON response
+                return response.json();
             })
             .then(result => {
                 // Handle the result here
+                if (result.error) {
+                    sendErrorToPopup(result.error)
+                    console.error(result.error)
+                }
                 if (result.answers) {
                     sendMessageToPopup(result.answers.join(", ")); // Join answers array into a string
                 }if (result.ticket) {
                     sendTicketToPopup(result.ticket); // Send ticket value to the popup
                 } else if (result.errorCode) {
-                    sendMessageToPopup("Webwork account is diffrent");
+                    sendMessageToPopup("Webwork account is diffrent"); // ps Old version remove later
                 }
             })
             .catch(error => {
                 console.error('Error sending webhook:', error);
-                throw error; // Rethrow error for further handling if necessary
+                throw error; // bugfix purpose
             });
 
 });
 }
-
-// Listener to handle messages from the popup or other parts of the extension
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "sendWebhook") {
         sendWebhook();

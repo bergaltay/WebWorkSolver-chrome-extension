@@ -5,13 +5,12 @@ document.getElementById("runFunction").addEventListener("click", () => {
     });
     deleteContent()
 });
-//---------------------------------------------------------------------
-// popup.js
 
 // Function to load content from storage
 function loadContent() {
     chrome.storage.local.get(['popupContent'], (result) => {
         const contentDiv = document.getElementById('content');
+        const ticketDiv = document.getElementById('ticket');
         contentDiv.innerHTML = ''; // Clear existing content
 
         if (result.popupContent) {
@@ -21,8 +20,16 @@ function loadContent() {
                 const answerDiv = document.createElement('h1'); // Create a new div for each answer
                 answerDiv.textContent = i + ":    " + answer.trim(); // Trim whitespace and set the text content
                 contentDiv.appendChild(answerDiv); // Append the answer div to the content div
+
                 i++;
             });
+        }
+    });
+    chrome.storage.local.get(['ticketCount'], (result) => { //Get ticket count from local storage
+        const ticketDiv = document.getElementById('ticket');
+        if (result.ticketCount) {
+            const ticketCount = result.ticketCount;
+            document.getElementById('ticket').innerText = ticketCount;
         }
     });
 }
@@ -40,13 +47,19 @@ function saveContent(text) {
 
     loadContent();
 }
+function saveTicket(ticket) {
+    chrome.storage.local.set({ ticketCount: ticket }, () => {
+        console.log('Ticket count saved:', ticket);
+    });
+
+    loadContent();
+}
 
 // Load content when the popup is opened
 document.addEventListener('DOMContentLoaded', () => {
     loadContent(); // Load content from storage on popup open
     // Listen for messages from the background script
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-        // Check if the message contains the text field
         if (request.text) {
             for (let i = 0;i<1;i++) {
                 const contentDiv = document.getElementById('content');
@@ -59,6 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (request.ticket) {
             // Display the ticket value in a specific HTML element
             document.getElementById('ticket').innerText = request.ticket;
+            saveTicket(request.ticket) // Save new ticket count
+        }
+        if (request.error) {
+            document.getElementById("error").innerText = request.error;
+            document.getElementById("ticket").innerText = 0;
+            saveTicket(0);
         }
 
     });
@@ -71,7 +90,4 @@ function deleteContent() {
         contentDiv.innerHTML = 'Loading...';
     });
 }
-
-
-//---------------------------------------------------------------------
 
